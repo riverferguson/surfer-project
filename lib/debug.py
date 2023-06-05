@@ -15,9 +15,9 @@ board2 = Surfboard('Takayama', 'Longboard', 'Noserider')
 board3 = Surfboard('Santa Cruz', 'Mid Length', 'Egg')
 
 #surfers
-surfer1 = Surfer('River', 'Ferguson', 26, 'Be better')
-surfer2 = Surfer('Caz', 'Mozeleski', 28, 'Hotdogger')
-surfer3 = Surfer('Guy', 'buddy', 30, 'beat it kook')
+surfer1 = Surfer('River', 'Ferguson', 26, 'Be better', board1)
+surfer2 = Surfer('Caz', 'Mozeleski', 28, 'Hotdogger', board2)
+surfer3 = Surfer('Guy', 'buddy', 30, 'beat it kook', board3)
 
 #waves
 wave1 = Waves(10, 'Mean', 10, 10)
@@ -26,10 +26,10 @@ wave3 = Waves(7, 'Super localized', 5, 4)
 wave4 = Waves(8, 'Worst locals ever', 10, 10) 
 
 #beaches
-beach1 = Beaches('Pipeline', 'Hawaii', 10, wave1)
-beach2 = Beaches('Sunset Beach', 'Hawaii', 9, wave2)
-beach3 = Beaches('Velzy Land', 'Hawaii', 7, wave3)
-beach4 = Beaches('Dirt Bags', 'California', 3, wave4)
+beach1 = Beaches('Pipeline', 'Hawaii', 10, wave1, surfer1)
+beach2 = Beaches('Sunset Beach', 'Hawaii', 9, wave2, surfer1)
+beach3 = Beaches('Velzy Land', 'Hawaii', 7, wave3, surfer3)
+beach4 = Beaches('Dirt Bags', 'California', 3, wave4, surfer2)
 
 print('Debugger')
 

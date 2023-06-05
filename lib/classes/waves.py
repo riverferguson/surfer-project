@@ -6,7 +6,7 @@ class Waves:
         self.difficulty = difficulty
         self.local_attitude = local_attitude
         self.danger_level = danger_level
-        self.popularity = popularity 
+        self.popularity = popularity
         
     
     @property

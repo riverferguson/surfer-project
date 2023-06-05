@@ -2,11 +2,12 @@ from .__init__ import CONN, CURSOR
 
 class Surfer:
     
-    def __init__(self, first_name, last_name, age, motto):
+    def __init__(self, first_name, last_name, age, motto, surfboard):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
         self.motto = motto
+        self.surfboard = surfboard
         
         
     @property
@@ -53,4 +54,15 @@ class Surfer:
         else:
             raise Exception('Your motto must be a string between 3 and 20 characters guy...we dont want your life story')
         
+    @property
+    def surfboard(self):
+        return self._surfboard
+    
+    @surfboard.setter
+    def surfboard(self, surfboard):
+        if isinstance(surfboard, Surfboard):
+            self._wave = surfboard
+        else:
+            raise Exception   
         
+from classes.surfboard import Surfboard 

@@ -2,11 +2,12 @@ from .__init__ import CONN, CURSOR
 
 class Beaches:
     
-    def __init__(self, name, location, popularity, wave):
+    def __init__(self, name, location, popularity, wave, surfer):
         self.name = name
         self.location = location
         self.popularity = popularity
         self.wave = wave
+        self.surfer = surfer 
         
     @property
     def name(self):
@@ -40,6 +41,18 @@ class Beaches:
             self._wave = wave
         else:
             raise Exception
+        
+    @property
+    def surfer(self):
+        return self._surfer
     
-from classes.waves import Waves 
+    @surfer.setter
+    def surfer(self, surfer):
+        if isinstance(surfer, Surfer):
+            self._wave = surfer
+        else:
+            raise Exception   
+    
+from classes.waves import Waves
+from classes.surfer import Surfer 
         
