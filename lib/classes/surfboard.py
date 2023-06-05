@@ -2,9 +2,10 @@ from .__init__ import CONN, CURSOR
 
 class Surfboard:
     
-    def __init__(self, shaper, height, width, thickness, make):
+    def __init__(self, shaper, size, model):
         self.shaper = shaper
-        self.height = height
-        self.width = width
-        self.thickness = thickness
-        self.make = make 
+        self.size = size
+        self.model = model
+        
+    
+    
