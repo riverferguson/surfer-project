@@ -53,3 +53,26 @@ class Waves:
         else:
             raise Exception('Popularity must be a number between 1 and 10 bro!')   
         
+    @classmethod
+    def create_table(cls):
+        pass
+    
+    @classmethod
+    def create(cls):
+        pass
+    
+    @classmethod
+    def find_by_name(cls):
+        pass
+    
+    @classmethod
+    def find_by_id(cls):
+        pass
+    
+    @classmethod
+    def update(cls):
+        pass
+    
+    @classmethod
+    def find_all(cls):
+        pass

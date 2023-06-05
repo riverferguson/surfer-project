@@ -63,6 +63,42 @@ class Surfer:
         if isinstance(surfboard, Surfboard):
             self._wave = surfboard
         else:
-            raise Exception   
+            raise Exception('Dont forget to give a surfer a surfboard!')   
+    
+    @property
+    def popularity(self):
+        return self._popularity
+    
+    @popularity.setter
+    def popularity(self, popularity):
+        if isinstance(popularity, int) and 1 <= popularity <= 10:
+            self._popularity = popularity
+        else:
+            raise Exception('Popularity must be a number between 1 and 10 bro!')   
+        
+    @classmethod
+    def create_table(cls):
+        pass
+    
+    @classmethod
+    def create(cls):
+        pass
+    
+    @classmethod
+    def find_by_name(cls):
+        pass
+    
+    @classmethod
+    def find_by_id(cls):
+        pass
+    
+    @classmethod
+    def update(cls):
+        pass
+    
+    @classmethod
+    def find_all(cls):
+        pass
+    
         
 from classes.surfboard import Surfboard 

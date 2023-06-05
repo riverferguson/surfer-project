@@ -2,7 +2,7 @@
 
 import ipdb 
 
-from classes.beaches import Beaches
+from classes.beach import Beach
 from classes.surfboard import Surfboard
 from classes.surfer import Surfer
 from classes.waves import Waves
@@ -26,10 +26,10 @@ wave3 = Waves(7, 'Super localized', 5, 4)
 wave4 = Waves(8, 'Worst locals ever', 10, 10) 
 
 #beaches
-beach1 = Beaches('Pipeline', 'Hawaii', 10, wave1, surfer1)
-beach2 = Beaches('Sunset Beach', 'Hawaii', 9, wave2, surfer1)
-beach3 = Beaches('Velzy Land', 'Hawaii', 7, wave3, surfer3)
-beach4 = Beaches('Dirt Bags', 'California', 3, wave4, surfer2)
+beach1 = Beach('Pipeline', 'Hawaii', 10, wave1, surfer1)
+beach2 = Beach('Sunset Beach', 'Hawaii', 9, wave2, surfer1)
+beach3 = Beach('Velzy Land', 'Hawaii', 7, wave3, surfer3)
+beach4 = Beach('Dirt Bags', 'California', 3, wave4, surfer2)
 
 print('Debugger')
 

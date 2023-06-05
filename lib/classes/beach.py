@@ -1,6 +1,6 @@
-from .__init__ import CONN, CURSOR
+from . import CONN, CURSOR
 
-class Beaches:
+class Beach:
     
     def __init__(self, name, location, popularity, wave, surfer):
         self.name = name
@@ -40,7 +40,7 @@ class Beaches:
         if isinstance(wave, Waves):
             self._wave = wave
         else:
-            raise Exception
+            raise Exception('Most beaches tend to have waves grom')
         
     @property
     def surfer(self):
@@ -51,8 +51,48 @@ class Beaches:
         if isinstance(surfer, Surfer):
             self._wave = surfer
         else:
-            raise Exception   
+            raise Exception('A lot of beaches have surfers, be sure to add one!')   
     
+    @classmethod
+    def create_table(cls):
+        sql = """
+            CREATE TABLE IF NOT EXISTS beaches(
+                id INTEGER PRIMARY KEY,
+                name TEXT,
+                LOCATION TEXT,
+                popularity TEXT
+            )
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+        
+    @classmethod
+    def create_table(cls):
+        pass
+    
+    @classmethod
+    def create(cls):
+        pass
+    
+    @classmethod
+    def find_by_name(cls):
+        pass
+    
+    @classmethod
+    def find_by_id(cls):
+        pass
+    
+    @classmethod
+    def update(cls):
+        pass
+    
+    @classmethod
+    def find_all(cls):
+        pass
+
+
+
+
 from classes.waves import Waves
 from classes.surfer import Surfer 
         
