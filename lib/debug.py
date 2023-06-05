@@ -15,9 +15,9 @@ board2 = Surfboard('Takayama', 'Longboard', 'Noserider')
 board3 = Surfboard('Santa Cruz', 'Mid Length', 'Egg')
 
 #surfers
-surfer1 = Surfer('River', 'Ferguson', 26, 'Be better', board1)
-surfer2 = Surfer('Caz', 'Mozeleski', 28, 'Hotdogger', board2)
-surfer3 = Surfer('Guy', 'buddy', 30, 'beat it kook', board3)
+surfer1 = Surfer('River', 'Ferguson', 26, 'Be better')
+surfer2 = Surfer('Caz', 'Mozeleski', 28, 'Hotdogger')
+surfer3 = Surfer('Guy', 'buddy', 30, 'beat it kook')
 
 #waves
 wave1 = Waves(10, 'Mean', 10, 10)
@@ -33,12 +33,15 @@ beach4 = Beach('Dirt Bags', 'California', 3, wave4, surfer2)
 
 print('Debugger')
 
-Waves.create_table()
-#Beach.create_table()
-#Beach.save("Morro bay", "california", 5, wave1, surfer1)
-# Surfboard.create_table()
-# Surfer.create_table()
 # Waves.create_table()
+# Waves.save(9, 'localized', 6, 7)
+Waves.create_table()
+Surfer.create_table()
+Beach.create_table()
+wave1.save()
+surfer1.save()
+beach1.save()
+# Surfboard.create_table()
 
 
 #ipdb.set_trace()

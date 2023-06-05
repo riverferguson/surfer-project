@@ -7,7 +7,8 @@ class Beach:
         self.location = location
         self.popularity = popularity
         self.wave = wave
-        self.surfer = surfer 
+        self.surfer = surfer
+        self.id = id 
         
     @property
     def name(self):
@@ -61,21 +62,21 @@ class Beach:
                 name TEXT,
                 location TEXT,
                 popularity TEXT,
-                wave TEXT,
-                surfer TEXT
+                wave_id INTEGER,
+                surfer_id INTEGER
             );
         """
         )
         CONN.commit()
         
-    @classmethod
-    def save(cls, name, location, popularity, wave, surfer):
-        beach = Beach(name, location, popularity, wave, surfer)
-        CURSOR.execute(f"""
-                INSERT INTO beaches(name, location, popularity, wave, surfer)
-                VALUES('{beach.name}', '{beach.location}', '{beach.popularity}', '{beach.wave}', '{beach.surfer}')
-        """)
+
+    def save(self):
+        CURSOR.execute("""
+                INSERT INTO beaches(name, location, popularity, wave_id, surfer_id)
+                VALUES(?, ?, ?, ?, ?)
+        """, (self.name, self.location, self.popularity, self.wave.id, self.surfer.id))
         CONN.commit()
+        self.id = CURSOR.lastrowid
         
     
     @classmethod

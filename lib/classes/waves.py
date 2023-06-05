@@ -2,11 +2,12 @@ from classes.__init__ import CONN, CURSOR
 
 class Waves:
     
-    def __init__(self, difficulty, local_attitude, danger_level, popularity):
+    def __init__(self, difficulty, local_attitude, danger_level, popularity, id=None):
         self.difficulty = difficulty
         self.local_attitude = local_attitude
         self.danger_level = danger_level
         self.popularity = popularity
+        self.id = id
         
     
     @property
@@ -56,12 +57,12 @@ class Waves:
     @classmethod
     def create_table(cls):
         sql = """
-            CREATE TABLE IF NOT EXISTS wave(
+            CREATE TABLE IF NOT EXISTS waves(
                 id INTEGER PRIMARY KEY,
-                difficulty INT,
+                difficulty INTEGER,
                 local_attitude TEXT,
-                danger_level INT,
-                popularity INT
+                danger_level INTEGER,
+                popularity INTEGER
             );
         """
         CURSOR.execute(sql)
@@ -69,12 +70,17 @@ class Waves:
     
     @classmethod
     def create(cls, difficulty, local_attitude, danger_level, popularity):
-        wave = Waves(difficulty, local_attitude, danger_level, popularity)
+        new_wave = cls(difficulty, local_attitude, danger_level, popularity)
+        new_wave.save()
+        return new_wave
+    
+    def save(self):
         CURSOR.execute(f"""
                 INSERT INTO waves(difficulty, local_attitude, danger_level, popularity)
-                VALUES('{wave.difficulty}', '{wave.local_attitude}', '{wave.danger_level}', '{wave.popularity}')
-        """)
+                VALUES(?, ?, ?, ?);
+        """, (self.difficulty, self.local_attitude, self.danger_level, self.popularity))
         CONN.commit()
+        self.id = CURSOR.lastrowid
     
     @classmethod
     def find_by_name(cls):

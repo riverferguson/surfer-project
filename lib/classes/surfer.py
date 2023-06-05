@@ -2,12 +2,12 @@ from classes.__init__ import CONN, CURSOR
 
 class Surfer:
     
-    def __init__(self, first_name, last_name, age, motto, surfboard):
+    def __init__(self, first_name, last_name, age, motto, id=None):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
         self.motto = motto
-        self.surfboard = surfboard
+        self.id = id
         
         
     @property
@@ -78,11 +78,27 @@ class Surfer:
         
     @classmethod
     def create_table(cls):
-        pass
-    
-    @classmethod
-    def create(cls):
-        pass
+        CURSOR.execute("""
+            CREATE TABLE IF NOT EXISTS surfers(
+                id INTEGER PRIMARY KEY,
+                first_name TEXT,
+                last_name TEXT,
+                age INTEGER,
+                motto TEXT
+            );
+        """
+        )
+        CONN.commit()
+        
+
+    def save(self):
+        CURSOR.execute("""
+                INSERT INTO surfers(first_name, last_name, age, motto)
+                VALUES(?, ?, ?, ?)
+        """, (self.first_name, self.last_name, self.age, self.motto))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
+        
     
     @classmethod
     def find_by_name(cls):
