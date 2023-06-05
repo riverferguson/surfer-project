@@ -55,11 +55,26 @@ class Waves:
         
     @classmethod
     def create_table(cls):
-        pass
+        sql = """
+            CREATE TABLE IF NOT EXISTS wave(
+                id INTEGER PRIMARY KEY,
+                difficulty INT,
+                local_attitude TEXT,
+                danger_level INT,
+                popularity INT
+            );
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
     
     @classmethod
-    def create(cls):
-        pass
+    def create(cls, difficulty, local_attitude, danger_level, popularity):
+        wave = Waves(difficulty, local_attitude, danger_level, popularity)
+        CURSOR.execute(f"""
+                INSERT INTO waves(difficulty, local_attitude, danger_level, popularity)
+                VALUES('{wave.difficulty}', '{wave.local_attitude}', '{wave.danger_level}', '{wave.popularity}')
+        """)
+        CONN.commit()
     
     @classmethod
     def find_by_name(cls):
