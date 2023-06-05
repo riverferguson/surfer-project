@@ -83,7 +83,7 @@ class Beach:
             WHERE name is ?;
         """, (name, ))
         row = CURSOR.fetchone()
-        return cls(row[1], row[2], row[3], row[4], row[5], row[0]) if row else None       
+        return cls(row[1], row[2], row[3], row[0]) if row else None       
     
     @classmethod
     def find_by_id(cls):
@@ -92,15 +92,26 @@ class Beach:
             WHERE id is ?;
         """, (id, ))
         row = CURSOR.fetchone()
-        return cls(row[1], row[2], row[3], row[4], row[5], row[0]) if row else None
+        return cls(row[1], row[2], row[3], row[0]) if row else None
     
     @classmethod
-    def update(cls):
-        pass
+    def update(cls, name, location, popularity):
+        beach = Beach(name, location, popularity)
+        CURSOR.execute("""
+            UPDATE pets
+            SET name=?, species=?, breed=?, temperament=?
+            WHERE id = ?
+        """, (beach.name, beach.location, beach.id))
+        CONN.commit()
+    
     
     @classmethod
     def find_all(cls):
-        pass
+        CURSOR.execute("""
+            SELECT * FROM beaches
+        """)
+        rows = CURSOR.fetchall()
+        return [cls(row[1], row[2] , row[3], row[0]) for row in rows]
 
 
 
