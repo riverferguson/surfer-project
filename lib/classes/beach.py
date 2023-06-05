@@ -1,8 +1,8 @@
-from . import CONN, CURSOR
+from classes.__init__ import CONN, CURSOR
 
 class Beach:
     
-    def __init__(self, name, location, popularity, wave, surfer):
+    def __init__(self, name, location, popularity, wave, surfer, id=None):
         self.name = name
         self.location = location
         self.popularity = popularity
@@ -55,24 +55,25 @@ class Beach:
     
     @classmethod
     def create_table(cls):
-        sql = """
+        CURSOR.execute("""
             CREATE TABLE IF NOT EXISTS beaches(
                 id INTEGER PRIMARY KEY,
                 name TEXT,
-                LOCATION TEXT,
+                location TEXT,
                 popularity TEXT
-            )
+            );
         """
-        CURSOR.execute(sql)
+        )
         CONN.commit()
         
     @classmethod
-    def create_table(cls):
-        pass
-    
-    @classmethod
-    def create(cls):
-        pass
+    def create(cls, name, location, popularity):
+        beach = Beach(name, location, popularity)
+        CURSOR.execute(f"""
+                INSERT INTO beaches(name, location, popularity)
+                VALUES('{beach.name}', '{beach.location}', '{beach.popularity}')
+        """)
+        
     
     @classmethod
     def find_by_name(cls):
@@ -89,7 +90,6 @@ class Beach:
     @classmethod
     def find_all(cls):
         pass
-
 
 
 

@@ -1,4 +1,4 @@
-from .__init__ import CONN, CURSOR
+from classes.__init__ import CONN, CURSOR
 
 class Surfer:
     

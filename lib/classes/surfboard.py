@@ -1,4 +1,4 @@
-from .__init__ import CONN, CURSOR
+from classes.__init__ import CONN, CURSOR
 
 class Surfboard:
     
@@ -41,7 +41,7 @@ class Surfboard:
         else:
             raise Exception('Model must be a string between 1 and 15 characters hoale')
         
-        @property
+    @property
     def popularity(self):
         return self._popularity
     

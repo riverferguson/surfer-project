@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+from classes.__init__ import CONN, CURSOR
 import ipdb 
 
 from classes.beach import Beach
@@ -33,4 +33,10 @@ beach4 = Beach('Dirt Bags', 'California', 3, wave4, surfer2)
 
 print('Debugger')
 
-ipdb.set_trace()
+Beach.create_table()
+# Surfboard.create_table()
+# Surfer.create_table()
+# Waves.create_table()
+
+
+#ipdb.set_trace()
