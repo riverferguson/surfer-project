@@ -2,11 +2,11 @@ from .__init__ import CONN, CURSOR
 
 class Beaches:
     
-    def __init__(self, name, location, popularity):
+    def __init__(self, name, location, popularity, wave):
         self.name = name
         self.location = location
         self.popularity = popularity
-        
+        self.wave = wave
         
     @property
     def name(self):
@@ -31,14 +31,15 @@ class Beaches:
             raise Exception('Location must be between a string between 1 and 20 characters kook!')
         
     @property
-    def popularity(self):
-        return self._popularity
+    def wave(self):
+        return self._wave
     
-    @popularity.setter
-    def popularity(self, popularity):
-        if isinstance(popularity, int) and 1 <= popularity <= 10:
-            self._popularity = popularity
+    @wave.setter
+    def wave(self, wave):
+        if isinstance(wave, Waves):
+            self._wave = wave
         else:
-            raise Exception('Popularity must be a number between 1 and 10 bro!')
-        
+            raise Exception
+    
+from classes.waves import Waves 
         

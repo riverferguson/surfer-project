@@ -25,10 +25,10 @@ class Surfboard:
     
     @size.setter
     def size(self, size):
-        if isinstance(size, int) and 4 <= size <= 14:
+        if isinstance(size, str) and 4 <= len(size) <= 14:
             self._size = size
         else:
-            raise Exception("Size of your board must be a number between 4 and 14...otherwise its not a surfboard")
+            raise Exception("Size of your board must be a str between 4 and 14...otherwise its not a surfboard")
         
     @property
     def model(self):
@@ -39,6 +39,6 @@ class Surfboard:
         if isinstance(model, str) and 1 <= len(model) <= 15:
             self._model = model
         else:
-            raise Exception('Model must be a string between 1 and 15 characters haole')
+            raise Exception('Model must be a string between 1 and 15 characters hoale')
         
         

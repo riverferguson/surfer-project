@@ -27,7 +27,7 @@ class Surfer:
     @last_name.setter
     def last_name(self, last_name):
         if isinstance(last_name, str) and 1 <= len(last_name) <= 15:
-            self._first_name = last_name
+            self._last_name = last_name
         else:
             raise Exception('Last name must be a string between 1 and 15 charcters buddy!') 
         
