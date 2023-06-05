@@ -1,4 +1,4 @@
 import sqlite3
 
-CONN = sqlite3.connect('lib/db/database.db')
+CONN = sqlite3.connect('database.db')
 CURSOR = CONN.cursor()

@@ -34,7 +34,7 @@ beach4 = Beach('Dirt Bags', 'California', 3, wave4, surfer2)
 print('Debugger')
 
 Beach.create_table()
-Beach.save()
+Beach.save("Morro bay", "california", 5, wave1, surfer1)
 # Surfboard.create_table()
 # Surfer.create_table()
 # Waves.create_table()
