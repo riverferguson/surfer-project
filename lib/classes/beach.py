@@ -73,15 +73,26 @@ class Beach:
                 INSERT INTO beaches(name, location, popularity)
                 VALUES('{beach.name}', '{beach.location}', '{beach.popularity}')
         """)
+        CONN.commit()
         
     
     @classmethod
-    def find_by_name(cls):
-        pass
+    def find_by_name(cls, name):
+        CURSOR.execute("""
+            SELECT * FROM beaches
+            WHERE name is ?;
+        """, (name, ))
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[5], row[0]) if row else None       
     
     @classmethod
     def find_by_id(cls):
-        pass
+        CURSOR.execute("""
+            SELECT * FROM beaches
+            WHERE id is ?;
+        """, (id, ))
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[5], row[0]) if row else None
     
     @classmethod
     def update(cls):
