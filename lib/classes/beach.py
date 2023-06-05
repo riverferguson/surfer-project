@@ -67,7 +67,7 @@ class Beach:
         CONN.commit()
         
     @classmethod
-    def create(cls, name, location, popularity):
+    def save(cls, name, location, popularity):
         beach = Beach(name, location, popularity)
         CURSOR.execute(f"""
                 INSERT INTO beaches(name, location, popularity)
@@ -98,10 +98,10 @@ class Beach:
     def update(cls, name, location, popularity):
         beach = Beach(name, location, popularity)
         CURSOR.execute("""
-            UPDATE pets
-            SET name=?, species=?, breed=?, temperament=?
+            UPDATE beaches
+            SET name=?, location=?, popularity=?
             WHERE id = ?
-        """, (beach.name, beach.location, beach.id))
+        """, (beach.name, beach.location, beach.popularity, beach.id))
         CONN.commit()
     
     
