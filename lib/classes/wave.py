@@ -54,6 +54,15 @@ class Wave:
         else:
             raise Exception('Popularity must be a number between 1 and 10 bro!')   
         
+    def save(self):
+        CURSOR.execute(f"""
+                INSERT INTO waves(difficulty, local_attitude, danger_level, popularity)
+                VALUES(?, ?, ?, ?);
+        """, (self.difficulty, self.local_attitude, self.danger_level, self.popularity))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
+    
+    
     @classmethod
     def create_table(cls):
         sql = """
@@ -73,14 +82,6 @@ class Wave:
         new_wave = cls(difficulty, local_attitude, danger_level, popularity)
         new_wave.save()
         return new_wave
-    
-    def save(self):
-        CURSOR.execute(f"""
-                INSERT INTO waves(difficulty, local_attitude, danger_level, popularity)
-                VALUES(?, ?, ?, ?);
-        """, (self.difficulty, self.local_attitude, self.danger_level, self.popularity))
-        CONN.commit()
-        self.id = CURSOR.lastrowid
     
     @classmethod
     def find_by_name(cls):

@@ -93,7 +93,7 @@ class Surfer:
         )
         CONN.commit()
         
-    @property
+    @classmethod
     def create(cls, first_name, last_name, age, motto):
         new_surfer = cls(first_name, last_name, age, motto)
         new_surfer.save()

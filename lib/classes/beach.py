@@ -71,14 +71,6 @@ class Beach:
             (self.id,),
         )
         CONN.commit()
-        
-    
-        
-    @property
-    def create(cls, name, location, popularity):
-        new_beach = cls(name, location, popularity)
-        new_beach.save()
-        return new_beach
     
     @classmethod
     def create_table(cls):
@@ -94,6 +86,12 @@ class Beach:
         """
         )
         CONN.commit()
+        
+    @classmethod
+    def create(cls, name, location, popularity, wave_id, surfer_id):
+        new_beach = cls(name, location, popularity, wave_id, surfer_id)
+        new_beach.save()
+        return new_beach
         
     @classmethod
     def find_by_name(cls, name):

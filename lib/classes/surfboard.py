@@ -2,10 +2,12 @@ from classes.__init__ import CONN, CURSOR
 
 class Surfboard:
     
-    def __init__(self, shaper, size, model):
+    def __init__(self, shaper, size, model, surfer, id=None):
         self.shaper = shaper
         self.size = size
         self.model = model
+        self.surfer = surfer
+        self.id = id 
         
     
     @property
@@ -50,16 +52,56 @@ class Surfboard:
         if isinstance(popularity, int) and 1 <= popularity <= 10:
             self._popularity = popularity
         else:
-            raise Exception('Popularity must be a number between 1 and 10 bro!')   
+            raise Exception('Popularity must be a number between 1 and 10 bro!')
         
+    @property
+    def surfer(self):
+        return self._surfer
+    
+    @surfer.setter
+    def surfer(self, surfer):
+        if isinstance(surfer, Surfer):
+            self._surfer = surfer
+        else:
+            raise Exception('A lot of beaches have surfers, be sure to add one!')   
+        
+    def save(self):
+        CURSOR.execute("""
+                INSERT INTO surfboards(shape, size, model, surfer_id)
+                VALUES(?, ?, ?, ?)
+        """, (self.shaper, self.size, self.model, self.surfer.id))
+        CONN.commit()
+        self.id = CURSOR.lastrowid 
+    
+    def delete(self):
+        CURSOR.execute(
+            """
+            DELETE FROM beaches
+            WHERE id = ?;
+            """,
+            (self.id,),
+        )
+        CONN.commit()    
+    
     @classmethod
     def create_table(cls):
-        pass
-    
+        CURSOR.execute("""
+                CREATE TABLE IF NOT EXISTS surfboards(
+                    id INTEGER PRIMARY KEY,
+                    shaper TEXT,
+                    size TEXT,
+                    model TEXT,
+                    surfer_id INTEGER
+                );
+        """)
+        CONN.commit()
+        
     @classmethod
-    def create(cls):
-        pass
-    
+    def create(cls, shaper, size, model, surfer_id):
+        new_surfboard = cls(shaper, size, model, surfer_id)
+        new_surfboard.save()
+        return new_surfboard
+        
     @classmethod
     def find_by_name(cls):
         pass
@@ -75,3 +117,6 @@ class Surfboard:
     @classmethod
     def find_all(cls):
         pass
+    
+    
+from classes.surfer import Surfer
