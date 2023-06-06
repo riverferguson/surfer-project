@@ -88,6 +88,15 @@ class Beach:
         CONN.commit()
         
     @classmethod
+    def drop_table(cls):
+        CURSOR.execute(
+            """
+            DROP TABLE IF EXISTS beaches;
+        """
+        )
+        CONN.commit()
+        
+    @classmethod
     def create(cls, name, location, popularity, wave_id, surfer_id):
         new_beach = cls(name, location, popularity, wave_id, surfer_id)
         new_beach.save()

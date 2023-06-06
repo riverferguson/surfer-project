@@ -76,6 +76,15 @@ class Wave:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        
+    @classmethod
+    def drop_table(cls):
+        CURSOR.execute(
+            """
+            DROP TABLE IF EXISTS waves;
+        """
+        )
+        CONN.commit()
     
     @classmethod
     def create(cls, difficulty, local_attitude, danger_level, popularity):

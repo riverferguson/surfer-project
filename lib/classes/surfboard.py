@@ -67,7 +67,7 @@ class Surfboard:
         
     def save(self):
         CURSOR.execute("""
-                INSERT INTO surfboards(shape, size, model, surfer_id)
+                INSERT INTO surfboards(shaper, size, model, surfer_id)
                 VALUES(?, ?, ?, ?)
         """, (self.shaper, self.size, self.model, self.surfer.id))
         CONN.commit()
@@ -94,6 +94,15 @@ class Surfboard:
                     surfer_id INTEGER
                 );
         """)
+        CONN.commit()
+        
+    @classmethod
+    def drop_table(cls):
+        CURSOR.execute(
+            """
+            DROP TABLE IF EXISTS surfboards;
+        """
+        )
         CONN.commit()
         
     @classmethod

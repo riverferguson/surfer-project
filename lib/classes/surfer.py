@@ -94,6 +94,15 @@ class Surfer:
         CONN.commit()
         
     @classmethod
+    def drop_table(cls):
+        CURSOR.execute(
+            """
+            DROP TABLE IF EXISTS surfers;
+        """
+        )
+        CONN.commit()
+        
+    @classmethod
     def create(cls, first_name, last_name, age, motto):
         new_surfer = cls(first_name, last_name, age, motto)
         new_surfer.save()
