@@ -20,14 +20,20 @@ Beach.create_table()
 
 
 #surfers
-surfer1 = Surfer.create('River', 'Ferguson', 26, 'Be better')
+surfer1 = Surfer.create('River', 'Ferguson', 26, 'Get Pitted')
 surfer2 = Surfer.create('Caz', 'Mozeleski', 28, 'Hotdogger')
 surfer3 = Surfer.create('Guy', 'buddy', 30, 'beat it kook')
+surfer4 = Surfer.create('Buddy', 'Guy', 22, "Hey Guyyy")
+surfer5 = Surfer.create('Craig', 'Dude', 22, "Stoked")
 
 #Surfboard
 board1 = Surfboard.create('Al Merrick', 'Shortboard', 'Flyer', surfer1)
 board2 = Surfboard.create('Takayama', 'Longboard', 'Noserider', surfer2)
 board3 = Surfboard.create('Santa Cruz', 'Mid Length', 'Egg', surfer3)
+board4 = Surfboard.create('Lost', 'Mid Length', 'Mayhem', surfer3)
+board5 = Surfboard.create('Arakawa', 'Shortboard', 'Carver', surfer5)
+board6 = Surfboard.create('Tokoro', 'Longboard', 'Spooner', surfer4)
+board7 = Surfboard.create('Aipa', 'Shortboard', 'Islander', surfer1)
 
 #waves
 wave1 = Wave.create(10, 'Mean', 10, 10)

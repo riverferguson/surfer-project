@@ -1,4 +1,4 @@
-from classes.__init__ import CONN, CURSOR
+
 
 class Beach:
     
@@ -54,6 +54,9 @@ class Beach:
         else:
             raise Exception('A lot of beaches have surfers, be sure to add one!')   
     
+    def update(self):
+        pass
+    
     def save(self):
         CURSOR.execute("""
                 INSERT INTO beaches(name, location, popularity, wave_id, surfer_id)
@@ -81,7 +84,9 @@ class Beach:
                 location TEXT,
                 popularity TEXT,
                 wave_id INTEGER,
-                surfer_id INTEGER
+                surfer_id INTEGER,
+                FOREIGN KEY (wave_id) REFERENCES waves(id),
+                FOREIGN KEY (surfer_id) REFERENCES surfers(id)
             );
         """
         )
@@ -101,6 +106,17 @@ class Beach:
         new_beach = cls(name, location, popularity, wave_id, surfer_id)
         new_beach.save()
         return new_beach
+    
+    # @classmethod
+    # def new_from_db(cls):
+    #     CURSOR.execute("""
+    #         SELECT * FROM beaches
+    #         ORDER BY id DESC
+    #         LIMIT 1;
+    #     """)
+    #     row = CURSOR.fetchone()
+    #     return cls(row[1], row[2], row[3], row[4], row[5], row[0])
+    # print('test')
         
     @classmethod
     def find_by_name(cls, name):
@@ -109,7 +125,7 @@ class Beach:
             WHERE name is ?;
         """, (name, ))
         row = CURSOR.fetchone()
-        return cls(row[1], row[2], row[3], row[4], row[5], row[6], row[0]) if row else None       
+        return cls(row[1], row[2], row[3], row[4], row[5], row[0]) if row else None       
     
     @classmethod
     def find_by_id(cls):
@@ -118,17 +134,7 @@ class Beach:
             WHERE id is ?;
         """, (id, ))
         row = CURSOR.fetchone()
-        return cls(row[1], row[2], row[3], row[4], row[5], row[6], row[0]) if row else None
-    
-    @classmethod
-    def update(cls, name, location, popularity):
-        beach = cls(name, location, popularity)
-        CURSOR.execute("""
-            UPDATE beaches
-            SET name=?, location=?, popularity=?
-            WHERE id = ?
-        """, (beach.name, beach.location, beach.popularity))
-        CONN.commit()
+        return cls(row[1], row[2], row[3], row[4], row[5], row[0]) if row else None
     
     @classmethod
     def find_all(cls):
@@ -136,10 +142,10 @@ class Beach:
             SELECT * FROM beaches
         """)
         rows = CURSOR.fetchall()
-        return [cls(row[1], row[2], row[3], row[4], row[5], row[6], row[0]) for row in rows]
+        return [cls(row[1], row[2], row[3], row[4], row[5], row[0]) for row in rows]
 
 
 
 from classes.wave import Wave
 from classes.surfer import Surfer 
-        
+from classes.__init__ import CONN, CURSOR

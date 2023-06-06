@@ -65,6 +65,9 @@ class Surfboard:
         else:
             raise Exception('A lot of beaches have surfers, be sure to add one!')   
         
+    def update(self):
+        pass
+    
     def save(self):
         CURSOR.execute("""
                 INSERT INTO surfboards(shaper, size, model, surfer_id)
@@ -112,20 +115,21 @@ class Surfboard:
         return new_surfboard
         
     @classmethod
-    def find_by_name(cls):
-        pass
-    
-    @classmethod
     def find_by_id(cls):
-        pass
-    
-    @classmethod
-    def update(cls):
-        pass
-    
+        CURSOR.execute("""
+            SELECT * FROM surfboards
+            WHERE id is ?;
+        """, (id, ))
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[0]) if row else None
+
     @classmethod
     def find_all(cls):
-        pass
+        CURSOR.execute("""
+            SELECT * FROM surfboards
+        """)
+        rows = CURSOR.fetchall()
+        return [cls(row[1], row[2], row[3], row[4], row[0]) for row in rows]
     
     
 from classes.surfer import Surfer

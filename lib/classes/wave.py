@@ -54,6 +54,9 @@ class Wave:
         else:
             raise Exception('Popularity must be a number between 1 and 10 bro!')   
         
+    def update(self):
+        pass
+    
     def save(self):
         CURSOR.execute(f"""
                 INSERT INTO waves(difficulty, local_attitude, danger_level, popularity)
@@ -61,7 +64,16 @@ class Wave:
         """, (self.difficulty, self.local_attitude, self.danger_level, self.popularity))
         CONN.commit()
         self.id = CURSOR.lastrowid
-    
+        
+    def delete(self):
+        CURSOR.execute(
+            """
+            DELETE FROM waves
+            WHERE id = ?;
+            """,
+            (self.id,),
+        )
+        CONN.commit()    
     
     @classmethod
     def create_table(cls):
@@ -93,17 +105,27 @@ class Wave:
         return new_wave
     
     @classmethod
-    def find_by_name(cls):
-        pass
+    def find_by_name(cls, name):
+        CURSOR.execute("""
+            SELECT * FROM waves
+            WHERE name is ?;
+        """, (name, ))
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[0]) if row else None
     
     @classmethod
     def find_by_id(cls):
-        pass
-    
-    @classmethod
-    def update(cls):
-        pass
-    
+        CURSOR.execute("""
+            SELECT * FROM waves
+            WHERE id is ?;
+        """, (id, ))
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[0]) if row else None
+        
     @classmethod
     def find_all(cls):
-        pass
+        CURSOR.execute("""
+            SELECT * FROM waves
+        """)
+        rows = CURSOR.fetchall()
+        return [cls(row[1], row[2], row[3], row[4], row[0]) for row in rows]
