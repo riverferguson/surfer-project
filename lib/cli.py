@@ -5,6 +5,7 @@ from helpers import (
     list_surfboards,
     list_surfers,
     list_waves,
+    find_beach_by_name,
     exit_program
 )
 
@@ -21,6 +22,8 @@ def main():
             list_surfers
         elif choice == '4':
             list_surfboards
+        elif choice == '5':
+            find_beach_by_name
         elif choice == '20':
             exit_program
             break

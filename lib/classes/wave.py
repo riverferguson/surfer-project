@@ -55,7 +55,21 @@ class Wave:
             raise Exception('Popularity must be a number between 1 and 10 bro!')   
         
     def update(self):
-        pass
+        CURSOR.execute(
+            """
+            UPDATE waves
+            SET difficulty = ?, local_attitude = ?, danger_level = ?, popularity = ?
+            WHERE id = ?
+            """,
+            (
+                self.difficulty,
+                self.local_attitude,
+                self.danger_level,
+                self.popularity,
+            ),
+        )
+        CONN.commit()
+        return type(self).find_by_id(self.id)
     
     def save(self):
         CURSOR.execute(f"""

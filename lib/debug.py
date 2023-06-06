@@ -59,8 +59,6 @@ beach2 = Beach.create('Sunset Beach', 'Hawaii', 9, wave2.id, surfer1.id)
 beach3 = Beach.create('Velzy Land', 'Hawaii', 7, wave3.id, surfer3.id)
 beach4 = Beach.create('Dirt Bags', 'California', 3, wave4.id, surfer2.id)
 
-beaches =  Beach.find_all()
-
 print('Debugger')
 
 

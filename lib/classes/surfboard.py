@@ -64,9 +64,23 @@ class Surfboard:
             self._surfer_id = surfer_id
         else:
             raise Exception('ID has to be an existing integer greater than 0')   
-        
+
     def update(self):
-        pass
+        CURSOR.execute(
+            """
+            UPDATE surfboards
+            SET shaper = ?, size = ?, model = ?, surfer_id = ?
+            WHERE id = ?
+            """,
+            (
+                self.shaper,
+                self.size,
+                self.model,
+                self.surfer_id,
+            ),
+        )
+        CONN.commit()
+        return type(self).find_by_id(self.id)
     
     def save(self):
         CURSOR.execute("""

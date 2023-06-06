@@ -1,3 +1,5 @@
+import re 
+
 def welcome():
     print('Welcome to Wave-Tracker')
     
@@ -44,6 +46,14 @@ def list_surfboards():
     surfboards = Surfboard.find_all()
     for surfboard in surfboards:
         print(surfboard)
+        
+def find_beach_by_name():
+    name = input("Enter the name of the beach: ")
+    if len(name).trim() and re.match(r"^[a-zA-Z ]+$", name) and name.title():
+        beach = Beach.find_by_name(name.title())
+        print(beach) if beach else print("No beach found")
+    else:
+        print("Invalid name")
         
 def exit_program():
     print("Goodbye!")

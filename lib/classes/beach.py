@@ -55,7 +55,22 @@ class Beach:
             raise Exception('ID has to be an existing integer greater than 0')   
     
     def update(self):
-        pass
+        CURSOR.execute(
+            """
+            UPDATE beaches
+            SET name = ?, location = ?, popularity = ?, wave_id = ?, surfer_id = ?
+            WHERE id = ?
+            """,
+            (
+                self.name,
+                self.location,
+                self.popularity,
+                self.wave_id,
+                self.surfer_id,
+            ),
+        )
+        CONN.commit()
+        return type(self).find_by_id(self.id)
     
     def save(self):
         CURSOR.execute("""
@@ -107,17 +122,6 @@ class Beach:
         new_beach.save()
         return new_beach
     
-    # @classmethod
-    # def new_from_db(cls):
-    #     CURSOR.execute("""
-    #         SELECT * FROM beaches
-    #         ORDER BY id DESC
-    #         LIMIT 1;
-    #     """)
-    #     row = CURSOR.fetchone()
-    #     return cls(row[1], row[2], row[3], row[4], row[5], row[0])
-    # print('test')
-        
     @classmethod
     def find_by_name(cls, name):
         CURSOR.execute("""

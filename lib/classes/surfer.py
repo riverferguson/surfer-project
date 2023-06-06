@@ -68,7 +68,21 @@ class Surfer:
         
 
     def update(self):
-        pass
+        CURSOR.execute(
+            """
+            UPDATE surfers
+            SET first_name = ?, last_name = ?, age = ?, motto = ?
+            WHERE id = ?
+            """,
+            (
+                self.first_name,
+                self.last_name,
+                self.age,
+                self.motto,
+            ),
+        )
+        CONN.commit()
+        return type(self).find_by_id(self.id)
     
 
     def save(self):
