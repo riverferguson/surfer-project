@@ -119,16 +119,16 @@ class Wave:
         return new_wave
     
     @classmethod
-    def find_by_name(cls, name):
+    def find_by_difficulty(cls, difficulty):
         CURSOR.execute("""
             SELECT * FROM waves
-            WHERE name is ?;
-        """, (name, ))
+            WHERE difficulty is ?;
+        """, (difficulty, ))
         row = CURSOR.fetchone()
         return cls(row[1], row[2], row[3], row[4], row[0]) if row else None
     
     @classmethod
-    def find_by_id(cls):
+    def find_by_id(cls, id):
         CURSOR.execute("""
             SELECT * FROM waves
             WHERE id is ?;
@@ -148,7 +148,7 @@ class Wave:
     def find_most_dangerous(cls):
         CURSOR.execute(
             """
-            SELECT danger_level FROM waves
+            SELECT * FROM waves
             ORDER by waves.danger_level DESC
             """
         )
