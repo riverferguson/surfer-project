@@ -5,7 +5,7 @@ import ipdb
 from classes.beach import Beach
 from classes.surfboard import Surfboard
 from classes.surfer import Surfer
-from classes.waves import Waves
+from classes.wave import Wave
 
 
 
@@ -20,10 +20,10 @@ surfer2 = Surfer('Caz', 'Mozeleski', 28, 'Hotdogger')
 surfer3 = Surfer('Guy', 'buddy', 30, 'beat it kook')
 
 #waves
-wave1 = Waves(10, 'Mean', 10, 10)
-wave2 = Waves(9, 'localized', 9, 10)
-wave3 = Waves(7, 'Super localized', 5, 4)
-wave4 = Waves(8, 'Worst locals ever', 10, 10) 
+wave1 = Wave(10, 'Mean', 10, 10)
+wave2 = Wave(9, 'localized', 9, 10)
+wave3 = Wave(7, 'Super localized', 5, 4)
+wave4 = Wave(8, 'Worst locals ever', 10, 10) 
 
 #beaches
 beach1 = Beach('Pipeline', 'Hawaii', 10, wave1, surfer1)
@@ -31,16 +31,19 @@ beach2 = Beach('Sunset Beach', 'Hawaii', 9, wave2, surfer1)
 beach3 = Beach('Velzy Land', 'Hawaii', 7, wave3, surfer3)
 beach4 = Beach('Dirt Bags', 'California', 3, wave4, surfer2)
 
+beach5 = Beach.create('Morro Rock', 'California', 6, wave3, surfer2)
+
 print('Debugger')
 
 # Waves.create_table()
 # Waves.save(9, 'localized', 6, 7)
-Waves.create_table()
-Surfer.create_table()
-Beach.create_table()
-wave1.save()
-surfer1.save()
-beach1.save()
+#Waves.create_table()
+
+print('done')
+# Surfer.create_table()
+# Beach.create_table()
+# wave1.save()
+# surfer1.save()
 # Surfboard.create_table()
 
 

@@ -54,16 +54,6 @@ class Surfer:
         else:
             raise Exception('Your motto must be a string between 3 and 20 characters guy...we dont want your life story')
         
-    @property
-    def surfboard(self):
-        return self._surfboard
-    
-    @surfboard.setter
-    def surfboard(self, surfboard):
-        if isinstance(surfboard, Surfboard):
-            self._wave = surfboard
-        else:
-            raise Exception('Dont forget to give a surfer a surfboard!')   
     
     @property
     def popularity(self):
@@ -75,6 +65,19 @@ class Surfer:
             self._popularity = popularity
         else:
             raise Exception('Popularity must be a number between 1 and 10 bro!')   
+        
+
+    def update(self):
+        pass
+    
+
+    def save(self):
+        CURSOR.execute("""
+                INSERT INTO surfers(first_name, last_name, age, motto)
+                VALUES(?, ?, ?, ?)
+        """, (self.first_name, self.last_name, self.age, self.motto))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
         
     @classmethod
     def create_table(cls):
@@ -90,15 +93,11 @@ class Surfer:
         )
         CONN.commit()
         
-
-    def save(self):
-        CURSOR.execute("""
-                INSERT INTO surfers(first_name, last_name, age, motto)
-                VALUES(?, ?, ?, ?)
-        """, (self.first_name, self.last_name, self.age, self.motto))
-        CONN.commit()
-        self.id = CURSOR.lastrowid
-        
+    @property
+    def create(cls, first_name, last_name, age, motto):
+        new_surfer = cls(first_name, last_name, age, motto)
+        new_surfer.save()
+        return new_surfer 
     
     @classmethod
     def find_by_name(cls):
@@ -108,10 +107,7 @@ class Surfer:
     def find_by_id(cls):
         pass
     
-    @classmethod
-    def update(cls):
-        pass
-    
+
     @classmethod
     def find_all(cls):
         pass

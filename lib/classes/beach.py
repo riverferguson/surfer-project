@@ -38,7 +38,7 @@ class Beach:
     
     @wave.setter
     def wave(self, wave):
-        if isinstance(wave, Waves):
+        if isinstance(wave, Wave):
             self._wave = wave
         else:
             raise Exception('Most beaches tend to have waves grom')
@@ -53,6 +53,32 @@ class Beach:
             self._surfer = surfer
         else:
             raise Exception('A lot of beaches have surfers, be sure to add one!')   
+    
+    def save(self):
+        CURSOR.execute("""
+                INSERT INTO beaches(name, location, popularity, wave_id, surfer_id)
+                VALUES(?, ?, ?, ?, ?)
+        """, (self.name, self.location, self.popularity, self.wave.id, self.surfer.id))
+        CONN.commit()
+        self.id = CURSOR.lastrowid
+        
+    def delete(self):
+        CURSOR.execute(
+            """
+            DELETE FROM beaches
+            WHERE id = ?;
+            """,
+            (self.id,),
+        )
+        CONN.commit()
+        
+    
+        
+    @property
+    def create(cls, name, location, popularity):
+        new_beach = cls(name, location, popularity)
+        new_beach.save()
+        return new_beach
     
     @classmethod
     def create_table(cls):
@@ -69,16 +95,6 @@ class Beach:
         )
         CONN.commit()
         
-
-    def save(self):
-        CURSOR.execute("""
-                INSERT INTO beaches(name, location, popularity, wave_id, surfer_id)
-                VALUES(?, ?, ?, ?, ?)
-        """, (self.name, self.location, self.popularity, self.wave.id, self.surfer.id))
-        CONN.commit()
-        self.id = CURSOR.lastrowid
-        
-    
     @classmethod
     def find_by_name(cls, name):
         CURSOR.execute("""
@@ -86,7 +102,7 @@ class Beach:
             WHERE name is ?;
         """, (name, ))
         row = CURSOR.fetchone()
-        return cls(row[1], row[2], row[0]) if row else None       
+        return cls(row[1], row[2], row[3], row[4], row[5], row[6], row[0]) if row else None       
     
     @classmethod
     def find_by_id(cls):
@@ -95,16 +111,16 @@ class Beach:
             WHERE id is ?;
         """, (id, ))
         row = CURSOR.fetchone()
-        return cls(row[1], row[2], row[0]) if row else None
+        return cls(row[1], row[2], row[3], row[4], row[5], row[6], row[0]) if row else None
     
     @classmethod
     def update(cls, name, location, popularity):
-        beach = Beach(name, location, popularity)
+        beach = cls(name, location, popularity)
         CURSOR.execute("""
             UPDATE beaches
             SET name=?, location=?, popularity=?
             WHERE id = ?
-        """, (beach.name, beach.location, beach.popularity, beach.id))
+        """, (beach.name, beach.location, beach.popularity))
         CONN.commit()
     
     @classmethod
@@ -113,10 +129,10 @@ class Beach:
             SELECT * FROM beaches
         """)
         rows = CURSOR.fetchall()
-        return [cls(row[1], row[2], row[0]) for row in rows]
+        return [cls(row[1], row[2], row[3], row[4], row[5], row[6], row[0]) for row in rows]
 
 
 
-from classes.waves import Waves
+from classes.wave import Wave
 from classes.surfer import Surfer 
         

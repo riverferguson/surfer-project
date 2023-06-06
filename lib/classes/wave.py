@@ -1,6 +1,6 @@
 from classes.__init__ import CONN, CURSOR
 
-class Waves:
+class Wave:
     
     def __init__(self, difficulty, local_attitude, danger_level, popularity, id=None):
         self.difficulty = difficulty
