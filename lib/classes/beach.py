@@ -2,12 +2,12 @@
 
 class Beach:
     
-    def __init__(self, name, location, popularity, wave, surfer, id=None):
+    def __init__(self, name, location, popularity, wave_id, surfer_id, id=None):
         self.name = name
         self.location = location
         self.popularity = popularity
-        self.wave = wave
-        self.surfer = surfer
+        self.wave_id = wave_id
+        self.surfer_id = surfer_id
         self.id = id 
         
     @property
@@ -34,25 +34,25 @@ class Beach:
         
     @property
     def wave(self):
-        return self._wave
+        return Wave.find_by_id(self.wave_id)
     
     @wave.setter
-    def wave(self, wave):
-        if isinstance(wave, Wave):
-            self._wave = wave
+    def wave(self, wave_id):
+        if isinstance(wave_id, int) and wave_id > 0 and Wave.find_by_id(self.wave_id):
+            self._wave_id = wave_id
         else:
-            raise Exception('Most beaches tend to have waves grom')
+            raise Exception('ID has to be an existing integer greater than 0')
         
     @property
     def surfer(self):
-        return self._surfer
+        return Surfer.find_by_id(self.surfer_id)
     
     @surfer.setter
-    def surfer(self, surfer):
-        if isinstance(surfer, Surfer):
-            self._surfer = surfer
+    def surfer(self, surfer_id):
+        if isinstance(surfer_id, int) and surfer_id > 0 and Surfer.find_by_id(self.surfer_id):
+            self._surfer_id = surfer_id
         else:
-            raise Exception('A lot of beaches have surfers, be sure to add one!')   
+            raise Exception('ID has to be an existing integer greater than 0')   
     
     def update(self):
         pass
@@ -61,7 +61,7 @@ class Beach:
         CURSOR.execute("""
                 INSERT INTO beaches(name, location, popularity, wave_id, surfer_id)
                 VALUES(?, ?, ?, ?, ?)
-        """, (self.name, self.location, self.popularity, self.wave.id, self.surfer.id))
+        """, (self.name, self.location, self.popularity, self.wave_id, self.surfer_id))
         CONN.commit()
         self.id = CURSOR.lastrowid
         
@@ -128,7 +128,7 @@ class Beach:
         return cls(row[1], row[2], row[3], row[4], row[5], row[0]) if row else None       
     
     @classmethod
-    def find_by_id(cls):
+    def find_by_id(cls, id):
         CURSOR.execute("""
             SELECT * FROM beaches
             WHERE id is ?;

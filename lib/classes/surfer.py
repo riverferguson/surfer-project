@@ -119,11 +119,11 @@ class Surfer:
         return new_surfer 
     
     @classmethod
-    def find_by_name(cls, name):
+    def find_by_name(cls, first_name):
         CURSOR.execute("""
             SELECT * FROM surfers
-            WHERE name is ?;
-        """, (name, ))
+            WHERE first_name is ?;
+        """, (first_name, ))
         row = CURSOR.fetchone()
         return cls(row[1], row[2], row[3], row[4], row[0]) if row else None 
     
@@ -146,4 +146,3 @@ class Surfer:
         return [cls(row[1], row[2], row[3], row[4], row[0]) for row in rows]
     
         
-from classes.surfboard import Surfboard 

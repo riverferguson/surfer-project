@@ -129,3 +129,14 @@ class Wave:
         """)
         rows = CURSOR.fetchall()
         return [cls(row[1], row[2], row[3], row[4], row[0]) for row in rows]
+    
+    @classmethod
+    def find_most_dangerous(cls):
+        CURSOR.execute(
+            """
+            SELECT danger_level FROM waves
+            ORDER by waves.danger_level DESC
+            """
+        )
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[0]) 

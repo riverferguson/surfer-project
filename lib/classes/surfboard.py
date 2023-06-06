@@ -2,11 +2,11 @@ from classes.__init__ import CONN, CURSOR
 
 class Surfboard:
     
-    def __init__(self, shaper, size, model, surfer, id=None):
+    def __init__(self, shaper, size, model, surfer_id, id=None):
         self.shaper = shaper
         self.size = size
         self.model = model
-        self.surfer = surfer
+        self.surfer_id = surfer_id
         self.id = id 
         
     
@@ -56,14 +56,14 @@ class Surfboard:
         
     @property
     def surfer(self):
-        return self._surfer
+        return Surfer.find_by_id(self.surfer_id)
     
     @surfer.setter
-    def surfer(self, surfer):
-        if isinstance(surfer, Surfer):
-            self._surfer = surfer
+    def surfer(self, surfer_id):
+        if isinstance(surfer_id, int) and surfer_id > 0 and Surfer.find_by_id(self.surfer_id):
+            self._surfer_id = surfer_id
         else:
-            raise Exception('A lot of beaches have surfers, be sure to add one!')   
+            raise Exception('ID has to be an existing integer greater than 0')   
         
     def update(self):
         pass
@@ -72,7 +72,7 @@ class Surfboard:
         CURSOR.execute("""
                 INSERT INTO surfboards(shaper, size, model, surfer_id)
                 VALUES(?, ?, ?, ?)
-        """, (self.shaper, self.size, self.model, self.surfer.id))
+        """, (self.shaper, self.size, self.model, self.surfer_id))
         CONN.commit()
         self.id = CURSOR.lastrowid 
     
@@ -115,7 +115,7 @@ class Surfboard:
         return new_surfboard
         
     @classmethod
-    def find_by_id(cls):
+    def find_by_id(cls, id):
         CURSOR.execute("""
             SELECT * FROM surfboards
             WHERE id is ?;

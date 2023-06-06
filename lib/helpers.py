@@ -19,7 +19,11 @@ def menu():
     print('13. Delete a broken surfboard')
     print('14. Delete a tired surfer')
     print('15. Delete a wave that is too dangerous')
-    print('16. Exit')
+    print('16. Find most dangerous wave')
+    print('17. Find safest wave')
+    print('18. Find most popular beach')
+    print('19. Find least popular beach')
+    print('20. Exit')
     
 def list_beaches():
     beaches = Beach.find_all()
@@ -40,6 +44,10 @@ def list_surfboards():
     surfboards = Surfboard.find_all()
     for surfboard in surfboards:
         print(surfboard)
+        
+def exit_program():
+    print("Goodbye!")
+    exit()
     
 from classes.beach import Beach
 from classes.surfboard import Surfboard
