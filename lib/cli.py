@@ -16,6 +16,7 @@ from helpers import (
     find_safest_wave,
     find_most_popular_beach,
     find_lest_popular_beach,
+    clear_terminal,
     exit_program
 )
 
@@ -25,38 +26,48 @@ def main():
         menu()
         choice = input("> ")
         if choice == '1':
+            clear_terminal()
             list_beaches()
         elif choice == '2':
-            list_waves()
-        elif choice == '3':
+            clear_terminal()
             list_surfers()
-        elif choice == '4':
+        elif choice == '3':
+            clear_terminal()
             list_surfboards()
-        elif choice == '5':
+        elif choice == '4':
             beach_name = input('Enter beach name and find its location: ')
+            clear_terminal()
             find_beach_by_name(beach_name)
-        elif choice == '6':
+        elif choice == '5':
             wave_id = input('Enter wave ID to find difficulty level: ')
+            clear_terminal()
             find_difficulty_by_id(wave_id)
-        elif choice == '7':
+        elif choice == '6':
             surfer_name = input('Enter surfer name to find motto: ')
+            clear_terminal()
             find_motto(surfer_name)
+        elif choice == '7':
+            clear_terminal()
+            add_new_beach()
         elif choice == '8':
-            new_beach = input('Enter new beach: ')
-            add_new_beach(new_beach)
+            clear_terminal()
+            add_new_surfer()
         elif choice == '9':
-            pass
+            clear_terminal()
+            add_new_surfboard()
         elif choice == '10':
-            pass
-        elif choice == '11':
+            clear_terminal()
             find_most_dangerous_wave()
-        elif choice == '12':
+        elif choice == '11':
+            clear_terminal()
             find_safest_wave()
-        elif choice == '13':
+        elif choice == '12':
+            clear_terminal()
             find_most_popular_beach()
-        elif choice == '14':
+        elif choice == '13':
+            clear_terminal()
             find_lest_popular_beach()
-        elif choice == '15':
+        elif choice == '14':
             exit_program
             break
         else:

@@ -1,27 +1,33 @@
-
-from rich import print 
+import re
+import os 
 
 def welcome():
-    print('Welcome to Wave-Tracker')
-    
+    print("""
+        _________________________
+        
+        'Welcome to Wave-Tracker'
+        _________________________
+        """)
+
     
 def menu():
-    print('Please select an option')
+    print("""
+        'Please select an option'
+        """)
     print('1. List all names of beaches')
-    print('2. List all difficult waves')
-    print('3. List all surfers')
-    print('4. List all surfboards')
-    print('5. Find a beach by name')
-    print('6. Find a difficulty of a wave by id')
-    print('7. Find a surfer\'s motto by name')
-    print('8. Add a new beach to our list')
-    print('9. Add a new surfer')
-    print('10. Add a new surfboard')
-    print('11. Find most dangerous wave')
-    print('12. Find safest wave')
-    print('13. Find most popular beach')
-    print('14. Find least popular beach')
-    print('15. Exit')
+    print('2. List all surfers')
+    print('3. List all surfboards')
+    print('4. Find a beach by name')
+    print('5. Find a difficulty of a wave by id')
+    print('6. Find a surfer\'s motto by name')
+    print('7. Add a new beach to our list')
+    print('8. Add a new surfer')
+    print('9. Add a new surfboard')
+    print('10. Find most dangerous wave')
+    print('11. Find safest wave')
+    print('12. Find most popular beach')
+    print('13. Find least popular beach')
+    print('14. Exit')
     
 def list_beaches():
     beaches = Beach.find_all()
@@ -49,7 +55,7 @@ def find_beach_by_name(beach):
     if beach_name:
         print(beach_name.location)
     else:
-        raise Exception("Beach not found. Enter valid name")
+        print("Beach not found. Enter valid name")
     
 def find_difficulty_by_id(wave_id):
     difficulty_id = Wave.find_by_id(wave_id)
@@ -66,19 +72,12 @@ def add_new_beach():
     wave_id = input("Enter a wave ID: ")
     surfer_id = input("Enter your surfer's ID: ")
     if (
-        isinstance(name, str)
-    and isinstance(location, str)
-    and isinstance(popularity, int)
-    and isinstance(wave_id, int)
-    and isinstance(surfer_id, int)
-    and len(name)
-    and len(location)
-    and popularity
-    and wave_id
-    and surfer_id
+        re.match(r"^\d+" , popularity)
+        and re.match(r"^\d+" , wave_id)
+        and re.match(r"^\d+" , surfer_id)
     ):
         try:
-            new_beach = Beach.create(name, location, popularity, wave_id, surfer_id)
+            new_beach = Beach.create(name, location, int(popularity), int(wave_id), int(surfer_id))
             print(new_beach)
         except Exception as error:
             print("Error creating beach: ", error)
@@ -86,10 +85,39 @@ def add_new_beach():
         print("Invalid name, location, popularity, wave_id, or surfer_id")
         
 def add_new_surfer():
-    pass
+    first_name = input("Enter new surfer's first name: ")
+    last_name = input("Enter new surfer's last name: ")
+    age = input("Enter new surfer's age: ")
+    motto = input("Enter new surfer's motto: ")
+    if (
+        re.match(r"^\d+" , age)
+    ):
+        try:
+            new_surfer = Surfer.create(first_name, last_name, int(age), motto)
+            print(new_surfer)
+        except Exception as error:
+            print("Error creating surfer: ", error)
+    else:
+        print("Invalid first name, last, age, or motto")
 
 def add_new_surfboard():
-    pass
+    shaper = input("Enter new surfboards shaper: ")
+    size = input("Enter new surfboards size: ")
+    model = input("Enter new surfboards model: ")
+    surfer_id = input("Enter surfer's id who owns this new board: ")
+    if (
+        isinstance(shaper, str)
+        and isinstance(size, str)
+        and isinstance(model, str)
+        and re.match(r"^\d+" , surfer_id)
+    ):
+        try:
+            new_surfboard = Surfboard.create(shaper, size, model, surfer_id)
+            print(new_surfboard)
+        except Exception as error:
+            print("Error creating surfboard: ", error)
+    else:
+        print("Invalid shaper, size, model or surfer_id")
     
 def find_most_dangerous_wave():
     most_dangerous = Wave.find_most_dangerous()
@@ -105,7 +133,10 @@ def find_most_popular_beach():
 
 def find_lest_popular_beach():
     least_popular = Beach.find_least_popular()
-    print(least_popular.name)            
+    print(least_popular.name)  
+    
+def clear_terminal():
+    os.system('clear')          
         
 def exit_program():
     print("Goodbye!")
