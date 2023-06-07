@@ -6,8 +6,8 @@ def welcome():
     
 def menu():
     print('Please select an option')
-    print('1. List all beaches')
-    print('2. List all waves')
+    print('1. List all names of beaches')
+    print('2. List all difficult waves')
     print('3. List all surfers')
     print('4. List all surfboards')
     print('5. Find a beach by name')
