@@ -153,4 +153,15 @@ class Wave:
             """
         )
         row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[0])
+    
+    @classmethod
+    def find_safest_wave(cls):
+        CURSOR.execute(
+            """
+            SELECT * FROM waves
+            ORDER by waves.danger_level ASC
+            """
+        )
+        row = CURSOR.fetchone()
         return cls(row[1], row[2], row[3], row[4], row[0]) 

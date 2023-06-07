@@ -148,6 +148,27 @@ class Beach:
         rows = CURSOR.fetchall()
         return [cls(row[1], row[2], row[3], row[4], row[5], row[0]) for row in rows]
 
+    @classmethod
+    def find_most_popular(cls):
+        CURSOR.execute(
+            """
+            SELECT * FROM beaches
+            ORDER by beaches.popularity DESC
+            """
+        )
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[5], row[0])
+    
+    @classmethod
+    def find_least_popular(cls):
+        CURSOR.execute(
+            """
+            SELECT * FROM beaches
+            ORDER by beaches.popularity ASC
+            """
+        )
+        row = CURSOR.fetchone()
+        return cls(row[1], row[2], row[3], row[4], row[5], row[0])
 
 
 from classes.wave import Wave

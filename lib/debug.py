@@ -55,7 +55,7 @@ wave4 = Wave.create(8, 'Worst locals ever', 10, 10)
 
 #beaches
 beach1 = Beach.create('Pipeline', 'Hawaii', 10, wave1.id, surfer1.id)
-beach2 = Beach.create('Sunset Beach', 'Hawaii', 9, wave2.id, surfer1.id)
+beach2 = Beach.create('Sunset Beach', 'Hawaii', 9, wave2.id, surfer5.id)
 beach3 = Beach.create('Velzy Land', 'Hawaii', 7, wave3.id, surfer3.id)
 beach4 = Beach.create('Dirt Bags', 'California', 3, wave4.id, surfer2.id)
 

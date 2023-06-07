@@ -142,7 +142,7 @@ class Surfer:
         return cls(row[1], row[2], row[3], row[4], row[0]) if row else None 
     
     @classmethod
-    def find_by_id(cls):
+    def find_by_id(cls, id):
         CURSOR.execute("""
             SELECT * FROM surfers
             WHERE id is ?;
