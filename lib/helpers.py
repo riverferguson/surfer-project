@@ -11,8 +11,8 @@ def menu():
     print('3. List all surfers')
     print('4. List all surfboards')
     print('5. Find a beach by name')
-    print('6. Find a wave by id')
-    print('7. Find a surfer by name')
+    print('6. Find a difficulty of a wave by id')
+    print('7. Find a surfer\'s motto by name')
     print('8. Find a surfboard by id')
     print('9. Add a new beach to our list')
     print('10. Add a new surfboard')
@@ -30,30 +30,35 @@ def menu():
 def list_beaches():
     beaches = Beach.find_all()
     for beach in beaches:
-        print(beach)
+        print(beach.name)
         
 def list_waves():
     waves = Wave.find_all()
     for wave in waves:
-        print(wave)
+        print(wave.difficulty)
         
 def list_surfers():
     surfers = Surfer.find_all()
     for surfer in surfers:
-        print(surfer)
+        print(surfer.first_name)
         
 def list_surfboards():
     surfboards = Surfboard.find_all()
     for surfboard in surfboards:
-        print(surfboard)
+        print(surfboard.model)
         
-def find_beach_by_name():
-    name = input("Enter the name of the beach: ")
-    if len(name).trim() and re.match(r"^[a-zA-Z ]+$", name) and name.title():
-        beach = Beach.find_by_name(name.title())
-        print(beach) if beach else print("No beach found")
-    else:
-        print("Invalid name")
+def find_beach_by_name(beach):
+    beach_name = Beach.find_by_name(beach)
+    print(beach_name.location)
+    
+def find_difficulty_by_id(wave_id):
+    difficulty_id = Wave.find_by_id(wave_id)
+    print(difficulty_id.difficulty)
+    
+def find_motto(first_name):
+    motto = Surfer.find_by_name(first_name)
+    print(motto.motto)
+            
         
 def exit_program():
     print("Goodbye!")

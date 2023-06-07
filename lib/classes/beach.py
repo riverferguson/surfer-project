@@ -31,6 +31,17 @@ class Beach:
             self._location = location
         else:
             raise Exception('Location must be between a string between 1 and 20 characters kook!')
+    
+    @property
+    def popularity(self):
+        return self._popularity
+    
+    @popularity.setter
+    def popularity(self, popularity):
+        if isinstance(popularity, int) and 1 <= popularity <= 10:
+            self._popularity = popularity
+        else:
+            raise Exception('Popularity must be between a string between 1 and 10 characters kook!')
         
     @property
     def wave(self):
@@ -97,7 +108,7 @@ class Beach:
                 id INTEGER PRIMARY KEY,
                 name TEXT,
                 location TEXT,
-                popularity TEXT,
+                popularity INTEGER,
                 wave_id INTEGER,
                 surfer_id INTEGER,
                 FOREIGN KEY (wave_id) REFERENCES waves(id),
