@@ -36,7 +36,7 @@ def menu():
 def list_beaches():
     beaches = Beach.find_all()
     for beach in beaches:
-        print(beach.name)
+        print(chalk.cyan(beach.name))
         
 def list_waves():
     waves = Wave.find_all()
@@ -46,33 +46,33 @@ def list_waves():
 def list_surfers():
     surfers = Surfer.find_all()
     for surfer in surfers:
-        print(f"{surfer.first_name} {surfer.last_name}, {surfer.age}")
+        print(chalk.cyan(f"{surfer.first_name} {surfer.last_name}, {surfer.age}"))
         
 def list_surfboards():
     surfboards = Surfboard.find_all()
     for surfboard in surfboards:
-        print(surfboard.model)
+        print(chalk.cyan(f'{surfboard.shaper} + {surfboard.model}, {surfboard.size}'))
         
 def find_beach_by_name(beach):
     beach_name = Beach.find_by_name(beach)
     
     if beach_name:
-        print(beach_name.location)
+        print(chalk.cyan(beach_name.location))
     else:
         print("Beach not found. Enter valid name")
     
 def find_difficulty_by_id(wave_id):
     difficulty_id = Wave.find_by_id(wave_id)
-    print(difficulty_id.difficulty)
+    print(chalk.cyan(difficulty_id.difficulty))
     
 def find_motto(first_name):
     motto = Surfer.find_by_name(first_name)
-    print(motto.motto)
+    print(chalk.cyan(motto.motto))
     
 def add_new_beach():
-    print("""
+    print(chalk.cyan("""
         To add a new beach we need to a name, location, popularity, a wave ID, and your surfer ID.
-        """)
+        """))
     name = input("Enter new beach name: ")
     location = input("Enter location of new beach: ")
     popularity = input("Enter the popularity level (number between 1 & 10): ")
@@ -85,18 +85,18 @@ def add_new_beach():
     ):
         try:
             new_beach = Beach.create(name, location, int(popularity), int(wave_id), int(surfer_id))
-            print(f"""
+            print(chalk.cyan(f"""
                 Alright, {new_beach.name} has been added to our list!
-                """)
+                """))
         except Exception as error:
             print("Error creating beach: ", error)
     else:
         print("Invalid name, location, popularity, wave_id, or surfer_id")
         
 def add_new_surfer():
-    print("""
+    print(chalk.cyan("""
     To add a surfer we need to know your first name, last name, age, and a tasty motto.      
-        """)
+        """))
     first_name = input("Enter new surfer's first name: ")
     last_name = input("Enter new surfer's last name: ")
     age = input("Enter new surfer's age: ")
@@ -106,17 +106,17 @@ def add_new_surfer():
     ):
         try:
             new_surfer = Surfer.create(first_name, last_name, int(age), motto)
-            print(f"""Hey, {new_surfer.first_name}, your surfer id is: {new_surfer.id}.
-                """)
+            print(chalk.cyan(f"""Hey, {new_surfer.first_name}, your surfer id is: {new_surfer.id}.
+                """))
         except Exception as error:
             print("Error creating surfer: ", error)
     else:
         print("Invalid first name, last, age, or motto")
 
 def add_new_surfboard():
-    print("""
+    print(chalk.cyan("""
         To add a new surfboard, we need to know the shaper, size , the model, and your surfer ID so we know its yours! 
-        """)
+        """))
     shaper = input("Enter new surfboards shaper: ")
     size = input("Enter new surfboards size (shortboard, mid-length, or longboard): ")
     model = input("Enter new surfboards model: ")
@@ -129,9 +129,9 @@ def add_new_surfboard():
     ):
         try:
             new_surfboard = Surfboard.create(shaper, size, model, surfer_id)
-            print(f"""
+            print(chalk.cyan(f"""
                 Ok, your new {new_surfboard.model} has beem added to our board rack with your ID: ({new_surfboard.surfer_id}) attached.
-                """)
+                """))
         except Exception as error:
             print("Error creating surfboard: ", error)
     else:
@@ -139,21 +139,21 @@ def add_new_surfboard():
     
 def find_most_dangerous_wave():
     most_dangerous = Wave.find_most_dangerous()
-    print(f'Local Attitude: {most_dangerous.local_attitude}')
-    print(f'Danger Level: {most_dangerous.danger_level}')
+    print(chalk.cyan(f'Local Attitude: {most_dangerous.local_attitude}'))
+    print(chalk.cyan(f'Danger Level: {most_dangerous.danger_level}'))
 
 def find_safest_wave():
     safest_wave = Wave.find_safest_wave()
-    print(f'Local Attitude: {safest_wave.local_attitude}')
-    print(f'Danger Level: {safest_wave.danger_level}')
+    print(chalk.cyan(f'Local Attitude: {safest_wave.local_attitude}'))
+    print(chalk.cyan(f'Danger Level: {safest_wave.danger_level}'))
 
 def find_most_popular_beach():
     most_popular = Beach.find_most_popular()
-    print(most_popular.name)
+    print(chalk.cyan(most_popular.name))
 
 def find_lest_popular_beach():
     least_popular = Beach.find_least_popular()
-    print(least_popular.name)  
+    print(chalk.cyan(least_popular.name))  
     
 def clear_terminal():
     os.system('clear')          
