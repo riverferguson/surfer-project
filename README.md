@@ -4,6 +4,7 @@ Wave-Tracker is designed to keep track of beaches, surfboards, and surfers infor
 ## Installation
 
 1. run pipenv install
-2. run pipenv shell
-3. run python3 lib/cli.py
+2. run pip install simple_chalk
+3. run pipenv shell
+4. run python3 lib/cli.py
 
