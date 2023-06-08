@@ -1,8 +1,9 @@
 import re
-import os 
+import os
+from simple_chalk import chalk, green, red, magenta, blue, cyan
 
 def welcome():
-    print("""
+    print(chalk.cyan("""
         
                 _      _      _      
         )`'-.,_)`'-.,_)`'-.,_)`'-.,_
@@ -10,13 +11,13 @@ def welcome():
         'Welcome to Wave-Tracker'
         _        _      _      _      
         )`'-.,_)`'-.,_)`'-.,_)`'-.,_
-        """)
+        """))
 
     
 def menu():
-    print("""
+    print(chalk.red("""
         'Please select an option'
-        """)
+        """))
     print('1. Add a new surfer')
     print('2. List all surfers')
     print('3. List all surfboards')
@@ -138,11 +139,13 @@ def add_new_surfboard():
     
 def find_most_dangerous_wave():
     most_dangerous = Wave.find_most_dangerous()
-    print(most_dangerous.danger_level)
+    print(f'Local Attitude: {most_dangerous.local_attitude}')
+    print(f'Danger Level: {most_dangerous.danger_level}')
 
 def find_safest_wave():
     safest_wave = Wave.find_safest_wave()
-    print(safest_wave.danger_level)
+    print(f'Local Attitude: {safest_wave.local_attitude}')
+    print(f'Danger Level: {safest_wave.danger_level}')
 
 def find_most_popular_beach():
     most_popular = Beach.find_most_popular()

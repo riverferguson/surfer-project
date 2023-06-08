@@ -1,3 +1,4 @@
+from simple_chalk import chalk, green, red, magenta, blue, cyan
 from helpers import (
     welcome,
     menu,
