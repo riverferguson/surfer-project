@@ -1,3 +1,5 @@
+from simple_chalk import chalk, green, red, magenta, blue, cyan
+
 from helpers import (
     welcome,
     menu,
@@ -35,15 +37,15 @@ def main():
             clear_terminal()
             list_surfboards()
         elif choice == '4':
-            beach_name = input('Enter beach name and find its location: ')
+            beach_name = input(chalk.green('Enter beach name and find its location: '))
             clear_terminal()
             find_beach_by_name(beach_name)
         elif choice == '5':
-            wave_id = input('Enter wave ID to find difficulty level: ')
+            wave_id = input(chalk.magenta.bold('Enter wave ID to find difficulty level: '))
             clear_terminal()
             find_difficulty_by_id(wave_id)
         elif choice == '6':
-            surfer_name = input('Enter surfer name to find motto: ')
+            surfer_name = input(chalk.cyan('Enter surfer name to find motto: '))
             clear_terminal()
             find_motto(surfer_name)
         elif choice == '7':
