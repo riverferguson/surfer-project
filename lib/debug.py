@@ -50,8 +50,8 @@ board7 = Surfboard.create('Aipa', 'Shortboard', 'Islander', surfer1.id)
 #waves
 wave1 = Wave.create(10, 'Mean', 10, 10)
 wave2 = Wave.create(9, 'localized', 9, 10)
-wave3 = Wave.create(7, 'Super localized', 5, 4)
-wave4 = Wave.create(8, 'Worst locals ever', 10, 10) 
+wave3 = Wave.create(8, 'Super localized', 5, 4)
+wave4 = Wave.create(7, 'Worst locals ever', 10, 10) 
 
 #beaches
 beach1 = Beach.create('Pipeline', 'Hawaii', 10, wave1.id, surfer1.id)

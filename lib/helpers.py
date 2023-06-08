@@ -3,10 +3,13 @@ import os
 
 def welcome():
     print("""
-        _________________________
+        
+                _      _      _      
+        )`'-.,_)`'-.,_)`'-.,_)`'-.,_
         
         'Welcome to Wave-Tracker'
-        _________________________
+        _        _      _      _      
+        )`'-.,_)`'-.,_)`'-.,_)`'-.,_
         """)
 
     
@@ -14,14 +17,14 @@ def menu():
     print("""
         'Please select an option'
         """)
-    print('1. List all names of beaches')
+    print('1. Add a new surfer')
     print('2. List all surfers')
     print('3. List all surfboards')
-    print('4. Find a beach by name')
+    print('4. List all beaches')
     print('5. Find a difficulty of a wave by id')
     print('6. Find a surfer\'s motto by name')
-    print('7. Add a new beach to our list')
-    print('8. Add a new surfer')
+    print('7. Add a new beach that you have surfed to our list')
+    print('8. Find location of beach by it\'s name')
     print('9. Add a new surfboard')
     print('10. Find most dangerous wave')
     print('11. Find safest wave')
@@ -42,7 +45,7 @@ def list_waves():
 def list_surfers():
     surfers = Surfer.find_all()
     for surfer in surfers:
-        print(surfer.first_name)
+        print(f"{surfer.first_name} {surfer.last_name}, {surfer.age}")
         
 def list_surfboards():
     surfboards = Surfboard.find_all()
@@ -66,10 +69,13 @@ def find_motto(first_name):
     print(motto.motto)
     
 def add_new_beach():
+    print("""
+        To add a new beach we need to a name, location, popularity, a wave ID, and your surfer ID.
+        """)
     name = input("Enter new beach name: ")
     location = input("Enter location of new beach: ")
     popularity = input("Enter the popularity level (number between 1 & 10): ")
-    wave_id = input("Enter a wave ID: ")
+    wave_id = input("Enter a wave ID (1: easy, 2: medium, 3:Hard): ")
     surfer_id = input("Enter your surfer's ID: ")
     if (
         re.match(r"^\d+" , popularity)
@@ -78,13 +84,18 @@ def add_new_beach():
     ):
         try:
             new_beach = Beach.create(name, location, int(popularity), int(wave_id), int(surfer_id))
-            print(new_beach)
+            print(f"""
+                Alright, {new_beach.name} has been added to our list!
+                """)
         except Exception as error:
             print("Error creating beach: ", error)
     else:
         print("Invalid name, location, popularity, wave_id, or surfer_id")
         
 def add_new_surfer():
+    print("""
+    To add a surfer we need to know your first name, last name, age, and a tasty motto.      
+        """)
     first_name = input("Enter new surfer's first name: ")
     last_name = input("Enter new surfer's last name: ")
     age = input("Enter new surfer's age: ")
@@ -94,15 +105,19 @@ def add_new_surfer():
     ):
         try:
             new_surfer = Surfer.create(first_name, last_name, int(age), motto)
-            print(new_surfer)
+            print(f"""Hey, {new_surfer.first_name}, your surfer id is: {new_surfer.id}.
+                """)
         except Exception as error:
             print("Error creating surfer: ", error)
     else:
         print("Invalid first name, last, age, or motto")
 
 def add_new_surfboard():
+    print("""
+        To add a new surfboard, we need to know the shaper, size , the model, and your surfer ID so we know its yours! 
+        """)
     shaper = input("Enter new surfboards shaper: ")
-    size = input("Enter new surfboards size: ")
+    size = input("Enter new surfboards size (shortboard, mid-length, or longboard): ")
     model = input("Enter new surfboards model: ")
     surfer_id = input("Enter surfer's id who owns this new board: ")
     if (
@@ -113,7 +128,9 @@ def add_new_surfboard():
     ):
         try:
             new_surfboard = Surfboard.create(shaper, size, model, surfer_id)
-            print(new_surfboard)
+            print(f"""
+                Ok, your new {new_surfboard.model} has beem added to our board rack with your ID: ({new_surfboard.surfer_id}) attached.
+                """)
         except Exception as error:
             print("Error creating surfboard: ", error)
     else:
