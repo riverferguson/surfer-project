@@ -130,7 +130,7 @@ def add_new_surfboard():
         try:
             new_surfboard = Surfboard.create(shaper, size, model, surfer_id)
             print(chalk.cyan(f"""
-                Ok, your new {new_surfboard.model} has beem added to our board rack with your ID: ({new_surfboard.surfer_id}) attached.
+                Ok, your new {new_surfboard.model} has been added to our board rack with your ID: ({new_surfboard.surfer_id}) attached.
                 """))
         except Exception as error:
             print("Error creating surfboard: ", error)
