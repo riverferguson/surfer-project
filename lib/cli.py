@@ -16,6 +16,7 @@ from helpers import (
     find_safest_wave,
     find_most_popular_beach,
     find_lest_popular_beach,
+    list_beaches_surfed,
     clear_terminal,
     exit_program
 )
@@ -68,6 +69,9 @@ def main():
             clear_terminal()
             find_lest_popular_beach()
         elif choice == '14':
+            clear_terminal()
+            list_beaches_surfed()
+        elif choice == '15':
             exit_program
             break
         else:
