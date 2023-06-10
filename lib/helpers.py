@@ -24,14 +24,15 @@ def menu():
     print('4. List all beaches')
     print('5. Find a difficulty of a wave by id')
     print('6. Find a surfer\'s motto by name')
-    print('7. Add a new beach that you have surfed to our list')
+    print('7. Add a beach that you have surfed to our list')
     print('8. Find location of beach by it\'s name')
     print('9. Add a new surfboard')
     print('10. Find most dangerous wave')
     print('11. Find safest wave')
     print('12. Find most popular beach')
     print('13. Find least popular beach')
-    print('14. Exit')
+    print('14. Show beaches surfed by surfer\'s ID')
+    print('15. Exit')
     
 def list_beaches():
     beaches = Beach.find_all()
@@ -153,7 +154,12 @@ def find_most_popular_beach():
 
 def find_lest_popular_beach():
     least_popular = Beach.find_least_popular()
-    print(chalk.cyan(least_popular.name))  
+    print(chalk.cyan(least_popular.name))
+    
+def list_beaches_surfed():
+    beaches = Beach.find_all()
+    for beach in beaches:
+        print(chalk.cyan(f'{beach.name} was surfed by surfer ID: {beach.surfer_id}'))
     
 def clear_terminal():
     os.system('clear')          
